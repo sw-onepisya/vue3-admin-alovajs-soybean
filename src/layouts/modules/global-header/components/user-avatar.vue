@@ -73,6 +73,7 @@ function handleDropdown(key: DropdownKey) {
     <div>
       <ButtonIcon>
         <SvgIcon icon="ph:user-circle" class="text-icon-large" />
+        <!-- TODO 6: 这里面的名字可能不用改、需要改的是 API 或者说字段、因为账户名是动态的 -->
         <span class="text-16px font-medium">{{ authStore.userInfo.userName }}</span>
       </ButtonIcon>
     </div>

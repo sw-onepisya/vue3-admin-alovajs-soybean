@@ -1,5 +1,6 @@
 /** Default theme settings */
 export const themeSettings: App.Theme.ThemeSetting = {
+  // TODO: 9 主题配置 主题初始化配置
   themeScheme: 'light',
   grayscale: false,
   colourWeakness: false,
@@ -84,6 +85,8 @@ export const themeSettings: App.Theme.ThemeSetting = {
   }
 };
 
+// TODO: 10 overrideThemeSettings 配置覆盖更新
+// 当发布新的版本时，可以通过配置覆盖更新的方式，来更新主题配置
 /**
  * Override theme settings
  *

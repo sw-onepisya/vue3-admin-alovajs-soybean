@@ -7,6 +7,7 @@ import { localStg } from '@/utils/storage';
 import { overrideThemeSettings, themeSettings } from '@/theme/settings';
 import { themeVars } from '@/theme/vars';
 
+// TODO: 12 主题 tokens 初始化
 /** Init theme settings */
 export function initThemeSettings() {
   const isProd = import.meta.env.PROD;
@@ -203,6 +204,7 @@ interface NaiveColorAction {
   handler: (color: string) => string;
 }
 
+// TODO: 13 根据主题颜色产出组件库的主题变量
 /**
  * Get naive theme colors
  *

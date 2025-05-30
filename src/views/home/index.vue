@@ -15,6 +15,7 @@ const gap = computed(() => (appStore.isMobile ? 0 : 16));
 
 <template>
   <NSpace vertical :size="16">
+    <!-- TODO: 3 可以考虑删除 -->
     <NAlert :title="$t('common.warning')" type="warning">
       {{ $t('page.home.branchDesc') }}
     </NAlert>

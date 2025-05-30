@@ -41,6 +41,7 @@ const watermarkProps = computed<WatermarkProps>(() => {
 </script>
 
 <template>
+  <!-- TODO: 14  应用主题变量 -->
   <NConfigProvider
     :theme="naiveDarkTheme"
     :theme-overrides="themeStore.naiveTheme"
