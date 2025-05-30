@@ -1,3 +1,20 @@
+> 目前我们使用的是 Naive 版本的 SoybeanAdmin，其他版本的文档请查看对应的仓库。
+> 目前是 TS 版本的代码、我们开发的时候需要使用 TS。
+
+
+- [本系统图标使用教程](https://docs.soybeanjs.cn/zh/guide/icon/usage.html)
+- [路由系统文档](https://docs.soybeanjs.cn/zh/guide/router/intro.html)
+  - 使用 命令行自动配置、我们需要遵守一些项目结构约定 具体请查看 [路由结构](https://docs.soybeanjs.cn/zh/guide/router/structure.html)
+  - [elegant-router 仓库](https://github.com/soybeanjs/elegant-router)
+  - [复用路由](https://github.com/soybeanjs/elegant-router?tab=readme-ov-file#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
+  - `src/router` 目录下面的 `elegant` 是自动生成的路由
+  - 路由定义中组件定义那里生成含义 `$`  分割 `布局方式` 和 `页面组件`
+- [网络请求如何使用-我们在项目里面使用 alovajs + axios](https://docs.soybeanjs.cn/zh/guide/request/usage.html)
+- [关闭 git hooks](https://docs.soybeanjs.cn/zh/guide/cli/git-hooks.html)
+
+
+---
+
 <div align="center">
 	<img src="./public/favicon.svg" width="160" />
 	<h1>SoybeanAdmin</h1>

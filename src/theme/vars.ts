@@ -17,6 +17,7 @@ function createColorPaletteVars() {
 
 const colorPaletteVars = createColorPaletteVars();
 
+// TODO: 11 基于 tokens 的 css 变量、可选择性的修改
 /** Theme vars */
 export const themeVars: App.Theme.ThemeTokenCSSVars = {
   colors: {

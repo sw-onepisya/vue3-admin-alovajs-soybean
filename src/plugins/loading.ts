@@ -25,7 +25,7 @@ export function setupLoading() {
   ];
 
   const logoWithClass = systemLogo.replace('<svg', `<svg class="size-128px text-primary"`);
-
+  // TODO: 8 loading 自定义
   const dot = loadingClasses
     .map(item => {
       return `<div class="absolute w-16px h-16px bg-primary rounded-8px animate-pulse ${item}"></div>`;
