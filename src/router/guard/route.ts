@@ -11,6 +11,7 @@ import { useRouteStore } from '@/store/modules/route';
 import { localStg } from '@/utils/storage';
 import { getRouteName } from '@/router/elegant/transform';
 
+// TODO: 23 修改路由守卫
 /**
  * create route guard
  *
