@@ -7,6 +7,7 @@ import { useAppStore } from '@/store/modules/app';
 import { useThemeStore } from '@/store/modules/theme';
 import { $t } from '@/locales';
 import PwdLogin from './modules/pwd-login.vue';
+// TODO: 30 如果不需要可以删除 验证码登录 和账号注册
 import CodeLogin from './modules/code-login.vue';
 import Register from './modules/register.vue';
 import ResetPwd from './modules/reset-pwd.vue';
@@ -29,9 +30,13 @@ interface LoginModule {
 
 const moduleMap: Record<UnionKey.LoginModule, LoginModule> = {
   'pwd-login': { label: loginModuleRecord['pwd-login'], component: PwdLogin },
+  // TODO: 30 如果不需要可以删除验证码登录
   'code-login': { label: loginModuleRecord['code-login'], component: CodeLogin },
+  // TODO: 30 如果不需要可以删除账号注册
   register: { label: loginModuleRecord.register, component: Register },
+  // TODO: 30 如果不需要可以删除忘记密码
   'reset-pwd': { label: loginModuleRecord['reset-pwd'], component: ResetPwd },
+  // TODO: 30 如果不需要可以删除 绑定微信
   'bind-wechat': { label: loginModuleRecord['bind-wechat'], component: BindWechat }
 };
 
