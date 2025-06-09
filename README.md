@@ -11,6 +11,9 @@
   - 路由定义中组件定义那里生成含义 `$`  分割 `布局方式` 和 `页面组件`
 - [网络请求如何使用-我们在项目里面使用 alovajs + axios](https://docs.soybeanjs.cn/zh/guide/request/usage.html)
 - [关闭 git hooks](https://docs.soybeanjs.cn/zh/guide/cli/git-hooks.html)
+  - 1、把 package.json 的 simple-git-hooks 里面的命令删掉
+  - 注意是是删除里面的命令、而不是直接把 simple-git-hooks 这个对象直接删掉、是把内部的 key value 删除掉
+  - 2、执行 simple-git-hooks 命令
 
 
 ---
