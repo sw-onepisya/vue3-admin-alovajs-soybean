@@ -1,12 +1,9 @@
-
 // alova.config.js
 // For more config detailed visit:
 // https://alova.js.org/tutorial/getting-started/extension-integration
 // https://alova.js.org/zh-CN/tutorial/getting-started/extension-integration/
 
-/**
- * @type { import('@alova/wormhole').Config }
- */
+/** @type {import('@alova/wormhole').Config} */
 export default {
   // api生成设置数组，每项代表一个自动生成的规则，包含生成的输入输出目录、规范文件地址等等
   generator: [
@@ -21,7 +18,8 @@ export default {
 
       // input参数3：没有直接指向openapi文件时，是一个文档地址，必须配合platform参数指定文档类型
       // input: 'http://192.168.5.123:8080'
-      input: 'https://visitors.qxyjm.com:8091/v2/api-docs?group=%E6%B8%85%E7%BF%94%E8%B6%8A%E8%AE%BF%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3',
+      input:
+        'https://visitors.qxyjm.com:8091/v2/api-docs?group=%E6%B8%85%E7%BF%94%E8%B6%8A%E8%AE%BF%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3',
 
       // （可选）platform为支持openapi的平台，目前只支持swagger，默认为空
       // 当指定了此参数后，input 字段只需要指定文档的地址而不需要指定到openapi文件
@@ -40,26 +38,21 @@ export default {
 
       /**
        * （可选）生成代码的类型，可选值为auto/ts/typescript/module/commonjs，默认为auto，会通过一定规则判断当前项目的类型，如果生成不正确你也可以自定义指定类型：
-       * ts/typescript：意思相同，表示生成ts类型文件
-       * module：生成esModule规范文件
-       * commonjs：表示生成commonjs规范文件
+       * ts/typescript：意思相同，表示生成ts类型文件 module：生成esModule规范文件 commonjs：表示生成commonjs规范文件
        */
       type: 'module',
 
-      /**
-       * 全局导出的api名称，可通过此名称全局范围访问自动生成的api，默认为`Apis`，配置了多个generator时为必填，且不可以重复
-       */
+      /** 全局导出的api名称，可通过此名称全局范围访问自动生成的api，默认为`Apis`，配置了多个generator时为必填，且不可以重复 */
       global: 'Apis',
 
-      /**
-       * 全局api对象挂载的宿主对象，默认为 `globalThis`，在浏览器中代表 `window`，在nodejs中代表 `global`
-       */
+      /** 全局api对象挂载的宿主对象，默认为 `globalThis`，在浏览器中代表 `window`，在nodejs中代表 `global` */
       globalHost: 'globalThis',
 
       /**
        * （可选）过滤或转换生成的api接口函数，返回一个新的apiDescriptor来生成api调用函数，未指定此函数时则不转换apiDescripor对象
        *
        * `apiDescriptor` 的类型和 openapi 文件的 api 项相同。
+       *
        * @see https://spec.openapis.org/oas/v3.1.0.html#operation-object
        */
       handleApi: apiDescriptor => {
@@ -75,7 +68,7 @@ export default {
         apiDescriptor.url = apiDescriptor.url.replace('/user', '');
         return apiDescriptor;
       }
-    },
+    }
   ],
   // （可选）是否自动更新接口，默认开启，每5分钟检查一次，false时关闭
   // autoUpdate: true

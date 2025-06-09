@@ -31,6 +31,7 @@
     "pnpm": ">=8.7.0"
   },
   "scripts": {
+    "alova": "alova",
     "build": "vite build --mode prod",
     "build:test": "vite build --mode test",
     "cleanup": "sa cleanup",
@@ -44,10 +45,11 @@
     "preview": "vite preview",
     "release": "sa release",
     "typecheck": "vue-tsc --noEmit --skipLibCheck",
-    "update-pkg": "sa update-pkg",
-    "alova": "alova"
+    "update-pkg": "sa update-pkg"
   },
   "dependencies": {
+    "@alova/adapter-axios": "^2.0.13",
+    "@alova/mock": "^2.0.14",
     "@better-scroll/core": "2.5.1",
     "@iconify/vue": "5.0.0",
     "@sa/axios": "workspace:*",
@@ -68,9 +70,7 @@
     "vue": "3.5.13",
     "vue-draggable-plus": "0.6.0",
     "vue-i18n": "11.1.3",
-    "vue-router": "4.5.1",
-    "@alova/adapter-axios": "^2.0.13",
-    "@alova/mock": "^2.0.14"
+    "vue-router": "4.5.1"
   },
   "devDependencies": {
     "@alova/wormhole": "^1.0.6",
