@@ -84,4 +84,26 @@ declare namespace Api {
       home: import('@elegant-router/types').LastLevelRouteKey;
     }
   }
+
+  // TODO: 29 添加系统管理类型、这里仅仅只是为了抑制 ts 报错
+  namespace SystemManage {
+    type AllRole = '1' | '2';
+    type UserList = [];
+    type User = {
+      id: number;
+      userName: string;
+      userGender: string;
+      nickName: string;
+      userPhone: string;
+      userEmail: string;
+      userRoles: string[];
+      status: string;
+    };
+    type UserSearchParams = {};
+
+    type MenuList = [];
+    type MenuTree = [];
+    type RoleList = [];
+    type RoleSearchParams = [];
+  }
 }
