@@ -15,9 +15,7 @@ export const alovaInstance = createAlova({
 
 export const $$userConfigMap = withConfigType({});
 
-/**
- * @type { Apis }
- */
+/** @type {Apis} */
 const Apis = createApis(alovaInstance, $$userConfigMap);
 
 export default Apis;
