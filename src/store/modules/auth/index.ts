@@ -13,6 +13,9 @@ import { useTabStore } from '../tab';
 import { clearAuthStorage, getToken } from './shared';
 import { useThemeStore } from '../theme'
 
+import Apis from '@/service-alova/api-auto';
+import to from 'await-to-js';
+
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const route = useRoute();
   const routeStore = useRouteStore();
@@ -103,12 +106,50 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
    */
   async function login(userName: string, password: string, redirect = true) {
     // TODO: 30 替换 login 逻辑
+    // startLoading();
+
+    // const { data: loginToken, error } = await fetchLogin(userName, password);
+
+    // if (!error) {
+    //   const pass = await loginByToken(loginToken);
+
+    //   if (pass) {
+    //     // Check if the tab needs to be cleared
+    //     const isClear = checkTabClear();
+    //     let needRedirect = redirect;
+
+    //     if (isClear) {
+    //       // If the tab needs to be cleared,it means we don't need to redirect.
+    //       needRedirect = false;
+    //     }
+    //     await redirectFromLogin(needRedirect);
+
+    //     window.$notification?.success({
+    //       title: $t('page.login.common.loginSuccess'),
+    //       content: $t('page.login.common.welcomeBack', { userName: userInfo.userName }),
+    //       duration: 4500
+    //     });
+    //   }
+    // } else {
+    //   resetStore();
+    // }
+
+    // endLoading();
+
     startLoading();
 
-    const { data: loginToken, error } = await fetchLogin(userName, password);
+    const [error, loginToken] = await to(Apis.general.pcLoginUsingPOST({
+      data: {
+        username: userName,
+        password: password
+      }
+    }));
 
     if (!error) {
-      const pass = await loginByToken(loginToken);
+      const pass = await loginByToken({
+        token: loginToken as string,
+        refreshToken: undefined
+      } as any);
 
       if (pass) {
         // Check if the tab needs to be cleared
@@ -127,9 +168,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
           duration: 4500
         });
       }
-    } else {
-      resetStore();
     }
+    // INFO: 无需在这里面处理错误、因为在 alova.js 的 onError 中已经处理了
 
     endLoading();
   }
@@ -152,18 +192,38 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function getUserInfo() {
-    
-    const { data: info, error } = await fetchGetUserInfo();
 
-    if (!error) {
-      // update store
-      Object.assign(userInfo, info);
+    // const { data: info, error } = await fetchGetUserInfo();
 
-      return true;
+    // if (!error) {
+    //   // update store
+    //   Object.assign(userInfo, info);
+
+    //   return true;
+    // }
+
+    // return false;
+
+    // INFO: 硬编码用户信息
+    // INFO-onepisya : 以后如果有需要再、修改为接口获取、现在是后端没有接口所以先硬编码
+    const info = {
+      "userId": "0",
+      "userName": "Admin",
+      "roles": [
+        "R_SUPER"
+      ],
+      "buttons": [
+        "B_CODE1",
+        "B_CODE2",
+        "B_CODE3"
+      ]
     }
 
-    return false;
+    Object.assign(userInfo, info);
+    // 设置新的水印文字
+    setWatermarkText(userInfo.userName)
 
+    return true
   }
 
   async function initUserInfo() {
