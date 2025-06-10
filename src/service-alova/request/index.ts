@@ -32,8 +32,8 @@ export const alova = createAlovaRequest(
   {
     baseURL,
     // TODO: 4 Mock 配置修改
-    // requestAdapter: import.meta.env.DEV ? mockAdapter : adapterFetch()
-    requestAdapter: adapterFetch()
+    requestAdapter: import.meta.env.DEV ? mockAdapter : adapterFetch()
+    // requestAdapter: adapterFetch()
   },
   {
     onRequest({ config }) {
