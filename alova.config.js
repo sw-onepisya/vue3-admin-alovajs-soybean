@@ -40,7 +40,7 @@ export default {
        * （可选）生成代码的类型，可选值为auto/ts/typescript/module/commonjs，默认为auto，会通过一定规则判断当前项目的类型，如果生成不正确你也可以自定义指定类型：
        * ts/typescript：意思相同，表示生成ts类型文件 module：生成esModule规范文件 commonjs：表示生成commonjs规范文件
        */
-      type: 'module',
+      type: 'ts',
 
       /** 全局导出的api名称，可通过此名称全局范围访问自动生成的api，默认为`Apis`，配置了多个generator时为必填，且不可以重复 */
       global: 'Apis',
