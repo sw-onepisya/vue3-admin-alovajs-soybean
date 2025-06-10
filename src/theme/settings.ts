@@ -113,7 +113,7 @@ export const themeSettings: App.Theme.ThemeSetting = {
     mixChildMenuWidth: 200
   },
   footer: { visible: true, fixed: false, height: 30, right: true },
-  watermark: { visible: true, text: '清翔越访客后台管理系统' },
+  watermark: { visible: true, text: '清翔越访客管理系统' },
   tokens: {
     light: {
       colors: {
@@ -167,7 +167,7 @@ export const overrideThemeSettings: Partial<App.Theme.ThemeSetting> = {
     mixChildMenuWidth: 200
   },
   footer: { visible: true, fixed: false, height: 30, right: true },
-  watermark: { visible: true, text: '清翔越访客后台管理系统' },
+  watermark: { visible: true, text: '清翔越访客管理系统' },
   tokens: {
     light: {
       colors: {

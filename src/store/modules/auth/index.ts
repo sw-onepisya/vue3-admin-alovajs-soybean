@@ -55,7 +55,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     tabStore.cacheTabs();
     routeStore.resetStore();
-    setWatermarkText('清翔越访客后台管理系统')
+    setWatermarkText('清翔越访客管理系统')
   }
 
   /** Record the user ID of the previous login session Used to compare with the current user ID on next login */
