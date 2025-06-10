@@ -39,7 +39,9 @@ const { isFullscreen, toggle } = useFullscreen();
       <GlobalBreadcrumb v-if="!appStore.isMobile" class="ml-12px" />
     </div>
     <div class="h-full flex-y-center justify-end">
+      <!-- TODO: 6 全局搜索 如果不需要可以删除 -->
       <GlobalSearch v-if="themeStore.header.globalSearch.visible" />
+      <!-- TODO: 6 全屏 如果不需要可以删除 -->
       <FullScreen v-if="!appStore.isMobile" :full="isFullscreen" @click="toggle" />
       <LangSwitch
         v-if="themeStore.header.multilingual.visible"
@@ -47,11 +49,13 @@ const { isFullscreen, toggle } = useFullscreen();
         :lang-options="appStore.localeOptions"
         @change-lang="appStore.changeLocale"
       />
+      <!-- TODO: 6 亮色暗色 主题切换 如果不需要可以删除 -->
       <ThemeSchemaSwitch
         :theme-schema="themeStore.themeScheme"
         :is-dark="themeStore.darkMode"
         @switch="themeStore.toggleThemeScheme"
       />
+      <!-- TODO: 6 主题配置 复制配置文件 如果不需要可以删除 -->
       <ThemeButton />
       <UserAvatar />
     </div>

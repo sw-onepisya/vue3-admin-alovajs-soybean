@@ -10,6 +10,7 @@ import { $t } from '@/locales';
 import { useRouteStore } from '../route';
 import { useTabStore } from '../tab';
 import { clearAuthStorage, getToken } from './shared';
+import { useThemeStore } from '../theme'
 
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const route = useRoute();
@@ -17,6 +18,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const tabStore = useTabStore();
   const { toLogin, redirectFromLogin } = useRouterPush(false);
   const { loading: loginLoading, startLoading, endLoading } = useLoading();
+  const { setWatermarkText } = useThemeStore()
 
   const token = ref(getToken());
 
@@ -53,6 +55,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     tabStore.cacheTabs();
     routeStore.resetStore();
+    setWatermarkText('SoybeanAdmin')
   }
 
   /** Record the user ID of the previous login session Used to compare with the current user ID on next login */
