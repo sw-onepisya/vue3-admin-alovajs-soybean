@@ -2,19 +2,18 @@ import { computed, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { defineStore } from 'pinia';
 import { useLoading } from '@sa/hooks';
-// TODO: 替换登录和获取用户的 API 为自己的 API 
+// TODO: 替换登录和获取用户的 API 为自己的 API
+import to from 'await-to-js';
 import { fetchGetUserInfo, fetchLogin } from '@/service/api';
 import { useRouterPush } from '@/hooks/common/router';
 import { localStg } from '@/utils/storage';
 import { SetupStoreId } from '@/enum';
 import { $t } from '@/locales';
+import Apis from '@/service-alova/api-auto';
 import { useRouteStore } from '../route';
 import { useTabStore } from '../tab';
+import { useThemeStore } from '../theme';
 import { clearAuthStorage, getToken } from './shared';
-import { useThemeStore } from '../theme'
-
-import Apis from '@/service-alova/api-auto';
-import to from 'await-to-js';
 
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const route = useRoute();
@@ -22,7 +21,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const tabStore = useTabStore();
   const { toLogin, redirectFromLogin } = useRouterPush(false);
   const { loading: loginLoading, startLoading, endLoading } = useLoading();
-  const { setWatermarkText } = useThemeStore()
+  const { setWatermarkText } = useThemeStore();
 
   const token = ref(getToken());
 
@@ -59,7 +58,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     tabStore.cacheTabs();
     routeStore.resetStore();
-    setWatermarkText('清翔越访客管理系统')
+    setWatermarkText('清翔越访客管理系统');
   }
 
   /** Record the user ID of the previous login session Used to compare with the current user ID on next login */
@@ -138,12 +137,14 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     startLoading();
 
-    const [error, loginToken] = await to(Apis.general.pcLoginUsingPOST({
-      data: {
-        username: userName,
-        password: password
-      }
-    }));
+    const [error, loginToken] = await to(
+      Apis.general.pcLoginUsingPOST({
+        data: {
+          username: userName,
+          password
+        }
+      })
+    );
 
     if (!error) {
       const pass = await loginByToken({
@@ -192,7 +193,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function getUserInfo() {
-
     // const { data: info, error } = await fetchGetUserInfo();
 
     // if (!error) {
@@ -207,23 +207,17 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     // INFO: 硬编码用户信息
     // INFO-onepisya : 以后如果有需要再、修改为接口获取、现在是后端没有接口所以先硬编码
     const info = {
-      "userId": "0",
-      "userName": "Admin",
-      "roles": [
-        "R_SUPER"
-      ],
-      "buttons": [
-        "B_CODE1",
-        "B_CODE2",
-        "B_CODE3"
-      ]
-    }
+      userId: '0',
+      userName: 'Admin',
+      roles: ['R_SUPER'],
+      buttons: ['B_CODE1', 'B_CODE2', 'B_CODE3']
+    };
 
     Object.assign(userInfo, info);
     // 设置新的水印文字
-    setWatermarkText(userInfo.userName)
+    setWatermarkText(userInfo.userName);
 
-    return true
+    return true;
   }
 
   async function initUserInfo() {
