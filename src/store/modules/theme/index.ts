@@ -162,6 +162,13 @@ export const useThemeStore = defineStore(SetupStoreId.Theme, () => {
     localStg.set('themeSettings', settings.value);
   }
 
+  /** onepisya:Custom add a function Set watermark text */
+  function setWatermarkText(text: string) {
+    settings.value.watermark = {
+      ...settings.value.watermark, text
+    };
+  }
+
   // cache theme settings when page is closed or refreshed
   useEventListener(window, 'beforeunload', () => {
     cacheThemeSettings();
@@ -209,6 +216,7 @@ export const useThemeStore = defineStore(SetupStoreId.Theme, () => {
     themeColors,
     naiveTheme,
     settingsJson,
+    setWatermarkText,
     setGrayscale,
     setColourWeakness,
     resetStore,
