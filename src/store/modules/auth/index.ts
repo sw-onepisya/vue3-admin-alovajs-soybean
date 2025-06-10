@@ -152,14 +152,14 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function getUserInfo() {
-    const { data: info, error } = await fetchGetUserInfo();
+    // const { data: info, error } = await fetchGetUserInfo();
 
-    if (!error) {
-      // update store
-      Object.assign(userInfo, info);
+    // if (!error) {
+    //   // update store
+    //   Object.assign(userInfo, info);
 
-      return true;
-    }
+    //   return true;
+    // }
 
     // return false;
 
