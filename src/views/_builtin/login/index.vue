@@ -71,6 +71,7 @@ const bgColor = computed(() => {
               class="text-20px lt-sm:text-18px"
               @switch="themeStore.toggleThemeScheme"
             />
+            <!-- TODO: 8 多语言 如果不需要可以主题配置中取消掉、 设置 visible:false -->
             <LangSwitch
               v-if="themeStore.header.multilingual.visible"
               :lang="appStore.locale"
