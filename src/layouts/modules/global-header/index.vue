@@ -39,10 +39,11 @@ const { isFullscreen, toggle } = useFullscreen();
       <GlobalBreadcrumb v-if="!appStore.isMobile" class="ml-12px" />
     </div>
     <div class="h-full flex-y-center justify-end">
-      <!-- TODO: 6 全局搜索 如果不需要可以删除 -->
+      <!-- TODO: 6 全局搜索 如果不需要可以主题配置中取消掉、 设置 visible:false -->
       <GlobalSearch v-if="themeStore.header.globalSearch.visible" />
       <!-- TODO: 6 全屏 如果不需要可以删除 -->
       <FullScreen v-if="!appStore.isMobile" :full="isFullscreen" @click="toggle" />
+      <!-- TODO: 6 多语言切换 如果不需要可以主题配置中取消掉、 设置 visible:false -->
       <LangSwitch
         v-if="themeStore.header.multilingual.visible"
         :lang="appStore.locale"
