@@ -2,6 +2,7 @@ import { computed, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { defineStore } from 'pinia';
 import { useLoading } from '@sa/hooks';
+// TODO: 替换登录和获取用户的 API 为自己的 API 
 import { fetchGetUserInfo, fetchLogin } from '@/service/api';
 import { useRouterPush } from '@/hooks/common/router';
 import { localStg } from '@/utils/storage';
@@ -101,6 +102,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
    * @param [redirect=true] Whether to redirect after login. Default is `true`
    */
   async function login(userName: string, password: string, redirect = true) {
+    // TODO: 30 替换 login 逻辑
     startLoading();
 
     const { data: loginToken, error } = await fetchLogin(userName, password);
@@ -159,7 +161,28 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       return true;
     }
 
-    return false;
+    // return false;
+
+    // INFO: 硬编码用户信息
+    // TODO-onepisya : 以后如果有需要再、修改为接口获取、现在是后端没有接口所以先硬编码
+    const info = {
+      "userId": "0",
+      "userName": "Admin",
+      "roles": [
+        "R_SUPER"
+      ],
+      "buttons": [
+        "B_CODE1",
+        "B_CODE2",
+        "B_CODE3"
+      ]
+    }
+
+    Object.assign(userInfo, info);
+    // 设置新的水印文字
+    setWatermarkText(userInfo.userName)
+
+    return true
   }
 
   async function initUserInfo() {
