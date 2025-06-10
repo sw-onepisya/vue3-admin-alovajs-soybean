@@ -6,7 +6,9 @@ import json5 from 'json5';
  * @param env The current env
  */
 export function createServiceConfig(env: Env.ImportMeta) {
+  // TODO: 28 代理创建入口
   const { VITE_SERVICE_BASE_URL, VITE_OTHER_SERVICE_BASE_URL } = env;
+  // console.log("env", env)
 
   let other = {} as Record<App.Service.OtherBaseURLKey, string>;
   try {
@@ -61,6 +63,7 @@ export function getServiceBaseURL(env: Env.ImportMeta, isProxy: boolean) {
   };
 }
 
+// TODO: 28 代理 确定使用 proxy-default 还是 proxy-${key}
 /**
  * Get proxy pattern of backend service base url
  *

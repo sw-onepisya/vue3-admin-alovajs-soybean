@@ -3,6 +3,7 @@ import { bgRed, bgYellow, green, lightBlue } from 'kolorist';
 import { consola } from 'consola';
 import { createServiceConfig } from '../../src/utils/service';
 
+// TODO: 28 代理创建函数
 /**
  * Set http proxy
  *
@@ -23,10 +24,12 @@ export function createViteProxy(env: Env.ImportMeta, enable: boolean) {
   other.forEach(item => {
     Object.assign(proxy, createProxyItem(item, isEnableProxyLog));
   });
-
+  // TODO: 28 打印具体的代理配置
+  console.log('proxy', proxy)
   return proxy;
 }
 
+// TODO: 28 实际的代理创建函数
 function createProxyItem(item: App.Service.ServiceConfigItem, enableLog: boolean) {
   const proxy: Record<string, ProxyOptions> = {};
 

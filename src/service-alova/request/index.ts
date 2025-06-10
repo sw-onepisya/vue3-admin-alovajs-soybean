@@ -28,9 +28,12 @@ const mockAdapter = createAlovaMockAdapter([featureUsers20241014], {
   matchMode: 'methodurl'
 });
 export const alova = createAlovaRequest(
+  // TODO: 使用其他的 baseURL定义在 VITE_OTHER_SERVICE_BASE_URL 中
   {
     baseURL,
+    // TODO: 4 Mock 配置修改
     requestAdapter: import.meta.env.DEV ? mockAdapter : adapterFetch()
+    // requestAdapter: adapterFetch()
   },
   {
     onRequest({ config }) {
