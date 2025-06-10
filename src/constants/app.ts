@@ -14,11 +14,11 @@ export const themeSchemaOptions = transformRecordToOption(themeSchemaRecord);
 
 export const loginModuleRecord: Record<UnionKey.LoginModule, App.I18n.I18nKey> = {
   // TODO: 30 国际化 key 映射、可以删除不需要的、新增需要的
-  'pwd-login': 'page.login.pwdLogin.title'
-  // 'code-login': 'page.login.codeLogin.title',
-  // register: 'page.login.register.title',
-  // 'reset-pwd': 'page.login.resetPwd.title',
-  // 'bind-wechat': 'page.login.bindWeChat.title'
+  'pwd-login': 'page.login.pwdLogin.title',
+  'code-login': 'page.login.codeLogin.title',
+  register: 'page.login.register.title',
+  'reset-pwd': 'page.login.resetPwd.title',
+  'bind-wechat': 'page.login.bindWeChat.title'
 };
 
 export const themeLayoutModeRecord: Record<UnionKey.ThemeLayoutMode, App.I18n.I18nKey> = {
