@@ -9,9 +9,9 @@ declare namespace UnionKey {
    * - reset-pwd: reset password
    * - bind-wechat: bind wechat
    */
-  // type LoginModule = 'pwd-login';
+  type LoginModule = 'pwd-login';
   // TODO: 30 登录类型、根据需要进行修改。
-  type LoginModule = 'pwd-login' | 'code-login' | 'register' | 'reset-pwd' | 'bind-wechat';
+  // type LoginModule = 'pwd-login' | 'code-login' | 'register' | 'reset-pwd' | 'bind-wechat';
 
   /** Theme scheme */
   type ThemeScheme = 'light' | 'dark' | 'auto';

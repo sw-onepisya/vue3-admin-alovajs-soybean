@@ -303,6 +303,7 @@ declare namespace App {
         updateContent: string;
         updateConfirm: string;
         updateCancel: string;
+        copyRight: string;
       };
       common: {
         action: string;

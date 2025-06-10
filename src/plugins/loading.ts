@@ -3,9 +3,9 @@ import { getRgb } from '@sa/color';
 import { DARK_CLASS } from '@/constants/app';
 import { localStg } from '@/utils/storage';
 import { toggleHtmlClass } from '@/utils/common';
-// TODO: 8 logo 和 loading 自定义如果需要的话
-import systemLogo from '@/assets/svg-icon/logo.svg?raw';
-
+// INFO: 8 logo 和 loading 自定义如果需要的话
+// import systemLogo from '@/assets/svg-icon/logo.svg?raw';
+import systemLogo from '@/assets/svg-icon/qing-xiang-yue-logo.svg?raw';
 import { $t } from '@/locales';
 
 export function setupLoading() {

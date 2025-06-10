@@ -26,5 +26,5 @@
   "unocss.root": ["./"],
   "vue.server.hybridMode": true,
   "i18n-ally.extract.keyMaxLength": 80,
-  "i18n-ally.fullReloadOnChanged": true,
+  "i18n-ally.fullReloadOnChanged": true
 }

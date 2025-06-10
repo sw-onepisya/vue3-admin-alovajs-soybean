@@ -91,22 +91,28 @@ async function handleAccountLogin(account: Account) {
       <div class="flex-y-center justify-between">
         <NCheckbox>{{ $t('page.login.pwdLogin.rememberMe') }}</NCheckbox>
         <!-- TODO: 30 如果不需要忘记密码、可以删除 -->
-        <NButton quaternary @click="toggleLoginModule('reset-pwd')">
+        <!--
+ <NButton quaternary @click="toggleLoginModule('reset-pwd')">
           {{ $t('page.login.pwdLogin.forgetPassword') }}
-        </NButton>
+        </NButton> 
+-->
       </div>
       <NButton type="primary" size="large" round block :loading="authStore.loginLoading" @click="handleSubmit">
         {{ $t('common.confirm') }}
       </NButton>
       <div class="flex-y-center justify-between gap-12px">
         <!-- TODO: 30 如果不需要验证码登录、可以删除 -->
-        <NButton class="flex-1" block @click="toggleLoginModule('code-login')">
+        <!--
+ <NButton class="flex-1" block @click="toggleLoginModule('code-login')">
           {{ $t(loginModuleRecord['code-login']) }}
-        </NButton>
+        </NButton> 
+-->
         <!-- TODO: 30 如果不需要注册、可以删除 -->
-        <NButton class="flex-1" block @click="toggleLoginModule('register')">
+        <!--
+ <NButton class="flex-1" block @click="toggleLoginModule('register')">
           {{ $t(loginModuleRecord.register) }}
-        </NButton>
+        </NButton> 
+-->
       </div>
       <NDivider class="text-14px text-#666 !m-0">{{ $t('page.login.pwdLogin.otherAccountLogin') }}</NDivider>
       <!-- TODO: 30 如果不需要其他账号登录、模拟账号一键登录、可以删除 -->
