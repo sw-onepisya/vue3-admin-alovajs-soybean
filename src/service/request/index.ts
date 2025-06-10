@@ -12,7 +12,8 @@ const { baseURL, otherBaseURL } = getServiceBaseURL(import.meta.env, isHttpProxy
 
 export const request = createFlatRequest<App.Service.Response, RequestInstanceState>(
   {
-    baseURL,
+    // baseURL,
+    baseURL: otherBaseURL.demo,
     headers: {
       apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2'
     }
