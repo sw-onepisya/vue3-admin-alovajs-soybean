@@ -99,7 +99,7 @@ export const themeSettings: App.Theme.ThemeSetting = {
   header: {
     height: 56,
     breadcrumb: { visible: true, showIcon: true },
-    multilingual: { visible: false },
+    multilingual: { visible: true },
     globalSearch: { visible: false }
   },
   tab: { visible: true, cache: true, height: 44, mode: 'chrome' },
@@ -113,7 +113,7 @@ export const themeSettings: App.Theme.ThemeSetting = {
     mixChildMenuWidth: 200
   },
   footer: { visible: true, fixed: false, height: 30, right: true },
-  watermark: { visible: true, text: 'SoybeanAdmin' },
+  watermark: { visible: true, text: '清翔越访客后台管理系统' },
   tokens: {
     light: {
       colors: {
@@ -167,7 +167,7 @@ export const overrideThemeSettings: Partial<App.Theme.ThemeSetting> = {
     mixChildMenuWidth: 200
   },
   footer: { visible: true, fixed: false, height: 30, right: true },
-  watermark: { visible: true, text: 'SoybeanAdmin' },
+  watermark: { visible: true, text: '清翔越访客后台管理系统' },
   tokens: {
     light: {
       colors: {

@@ -55,7 +55,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     tabStore.cacheTabs();
     routeStore.resetStore();
-    setWatermarkText('SoybeanAdmin')
+    setWatermarkText('清翔越访客后台管理系统')
   }
 
   /** Record the user ID of the previous login session Used to compare with the current user ID on next login */
@@ -150,16 +150,37 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function getUserInfo() {
-    const { data: info, error } = await fetchGetUserInfo();
+    // const { data: info, error } = await fetchGetUserInfo();
 
-    if (!error) {
-      // update store
-      Object.assign(userInfo, info);
+    // if (!error) {
+    //   // update store
+    //   Object.assign(userInfo, info);
 
-      return true;
+    //   return true;
+    // }
+
+    // return false;
+
+    // INFO: 硬编码用户信息
+    // TODO-onepisya : 以后如果有需要再、修改为接口获取、现在是后端没有接口所以先硬编码
+    const info = {
+      "userId": "0",
+      "userName": "Admin",
+      "roles": [
+        "R_SUPER"
+      ],
+      "buttons": [
+        "B_CODE1",
+        "B_CODE2",
+        "B_CODE3"
+      ]
     }
 
-    return false;
+    Object.assign(userInfo, info);
+    // 设置新的水印文字
+    setWatermarkText(userInfo.userName)
+
+    return true
   }
 
   async function initUserInfo() {
