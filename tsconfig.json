@@ -21,6 +21,6 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue", "src/**/*", "typings/**/*", "src/service-alova/api-auto/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
