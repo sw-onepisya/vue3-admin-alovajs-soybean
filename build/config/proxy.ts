@@ -25,7 +25,7 @@ export function createViteProxy(env: Env.ImportMeta, enable: boolean) {
     Object.assign(proxy, createProxyItem(item, isEnableProxyLog));
   });
   // TODO: 28 打印具体的代理配置
-  console.log('proxy', proxy)
+  console.log('proxy', proxy);
   return proxy;
 }
 

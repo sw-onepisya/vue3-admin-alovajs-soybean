@@ -165,7 +165,8 @@ export const useThemeStore = defineStore(SetupStoreId.Theme, () => {
   /** onepisya:Custom add a function Set watermark text */
   function setWatermarkText(text: string) {
     settings.value.watermark = {
-      ...settings.value.watermark, text
+      ...settings.value.watermark,
+      text
     };
   }
 
