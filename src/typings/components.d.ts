@@ -32,6 +32,7 @@ declare module 'vue' {
     IconMdiArrowDownThin: typeof import('~icons/mdi/arrow-down-thin')['default']
     IconMdiArrowUpThin: typeof import('~icons/mdi/arrow-up-thin')['default']
     IconMdiDrag: typeof import('~icons/mdi/drag')['default']
+    IconMdiInformation: typeof import('~icons/mdi/information')['default']
     IconMdiKeyboardEsc: typeof import('~icons/mdi/keyboard-esc')['default']
     IconMdiKeyboardReturn: typeof import('~icons/mdi/keyboard-return')['default']
     IconMdiRefresh: typeof import('~icons/mdi/refresh')['default']
