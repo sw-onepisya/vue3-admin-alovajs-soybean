@@ -33,7 +33,13 @@ export const alova = createAlovaRequest(
     baseURL,
     // TODO: 4 Mock 配置修改
     // requestAdapter: import.meta.env.DEV ? mockAdapter : adapterFetch()
-    requestAdapter: adapterFetch()
+    requestAdapter: adapterFetch(),
+    cacheFor: {
+      GET:{
+       mode: 'restore',
+       expire: 3 * 1000
+      }
+     }
   },
   {
     onRequest({ config }) {
@@ -115,6 +121,6 @@ export const alova = createAlovaRequest(
       }
       showErrorMsg(state, message);
       throw error;
-    }
+    },
   }
 );
