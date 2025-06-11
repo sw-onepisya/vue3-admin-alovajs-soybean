@@ -89,6 +89,7 @@ async function handleAccountLogin(account: Account) {
     </NFormItem>
     <NSpace vertical :size="24">
       <div class="flex-y-center justify-between">
+        <!-- TODO: 30 记住我如果不需要可以取消掉 因为需要后端设置失效时间 -->
         <NCheckbox>{{ $t('page.login.pwdLogin.rememberMe') }}</NCheckbox>
         <!-- TODO: 30 如果不需要忘记密码、可以删除 -->
         <NButton quaternary @click="toggleLoginModule('reset-pwd')">
