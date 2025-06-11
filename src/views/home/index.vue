@@ -272,13 +272,14 @@ const formatCreateTime = timeStr => {
           <NSpace justify="end">
             <NButton type="primary" :disabled="loading" @click="handleSearch">
               <template #icon>
-                <icon-uil-search />
+                <icon-uil-search v-show="!loading" class="text-icon"/>
+                <icon-mdi-refresh v-show="loading" class="text-icon" :class="{ 'animate-spin': loading }" />
               </template>
               搜索
             </NButton>
             <NButton :disabled="loading" @click="handleReset">
               <template #icon>
-                <icon-mdi-refresh />
+                <icon-mdi-refresh class="text-icon" :class="{ 'animate-spin': loading }" />
               </template>
               重置
             </NButton>
