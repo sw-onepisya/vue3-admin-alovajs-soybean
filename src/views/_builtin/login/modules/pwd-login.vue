@@ -19,9 +19,14 @@ interface FormModel {
   password: string;
 }
 
+// const model: FormModel = reactive({
+//   userName: 'Soybean',
+//   password: '123456'
+// });
+
 const model: FormModel = reactive({
-  userName: 'Soybean',
-  password: '123456'
+  userName: 'admin',
+  password: 'admin123'
 });
 
 const rules = computed<Record<keyof FormModel, App.Global.FormRule[]>>(() => {
@@ -48,24 +53,45 @@ interface Account {
   password: string;
 }
 
+// const accounts = computed<Account[]>(() => [
+//   {
+//     key: 'super',
+//     label: $t('page.login.pwdLogin.superAdmin'),
+//     userName: 'Super',
+//     password: '123456'
+//   },
+//   {
+//     key: 'admin',
+//     label: $t('page.login.pwdLogin.admin'),
+//     userName: 'Admin',
+//     password: '123456'
+//   },
+//   {
+//     key: 'user',
+//     label: $t('page.login.pwdLogin.user'),
+//     userName: 'User',
+//     password: '123456'
+//   }
+// ]);
+
 const accounts = computed<Account[]>(() => [
   {
     key: 'super',
     label: $t('page.login.pwdLogin.superAdmin'),
-    userName: 'Super',
-    password: '123456'
+    userName: 'admin',
+    password: 'admin123'
   },
   {
     key: 'admin',
     label: $t('page.login.pwdLogin.admin'),
-    userName: 'Admin',
-    password: '123456'
+    userName: 'admin',
+    password: 'admin123'
   },
   {
     key: 'user',
     label: $t('page.login.pwdLogin.user'),
-    userName: 'User',
-    password: '123456'
+    userName: 'admin',
+    password: 'admin123'
   }
 ]);
 
@@ -80,16 +106,13 @@ async function handleAccountLogin(account: Account) {
       <NInput v-model:value="model.userName" :placeholder="$t('page.login.common.userNamePlaceholder')" />
     </NFormItem>
     <NFormItem path="password">
-      <NInput
-        v-model:value="model.password"
-        type="password"
-        show-password-on="click"
-        :placeholder="$t('page.login.common.passwordPlaceholder')"
-      />
+      <NInput v-model:value="model.password" type="password" show-password-on="click"
+        :placeholder="$t('page.login.common.passwordPlaceholder')" />
     </NFormItem>
     <NSpace vertical :size="24">
       <div class="flex-y-center justify-between">
-        <NCheckbox>{{ $t('page.login.pwdLogin.rememberMe') }}</NCheckbox>
+        <!-- TODO: 记住我如果不需要可以取消掉 因为需要后端设置失效时间 -->
+        <!-- <NCheckbox>{{ $t('page.login.pwdLogin.rememberMe') }}</NCheckbox> -->
         <!-- TODO: 30 如果不需要忘记密码、可以删除 -->
         <!--
  <NButton quaternary @click="toggleLoginModule('reset-pwd')">

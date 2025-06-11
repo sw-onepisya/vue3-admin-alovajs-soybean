@@ -94,7 +94,8 @@ const columns = [
   {
     title: '被访人',
     key: 'receptionistName',
-    width: 120
+    width: 120,
+    fixed: 'left'
   },
   {
     title: '审批状态',
@@ -103,7 +104,8 @@ const columns = [
     render: row => {
       const { status, type } = getStatusInfo(row);
       return h(NTag, { type }, { default: () => status });
-    }
+    },
+    fixed: 'left'
   },
   {
     title: '预约人',
@@ -154,6 +156,22 @@ const columns = [
     key: 'createTime',
     width: 180,
     render: row => formatCreateTime(row.createTime)
+  },
+  {
+    title: '操作',
+    key: 'action',
+    width: 100,
+    fixed: 'right',
+    render: row => {
+      return h(NSpace, { justify: 'center' }, {
+        default: () => [
+          h(NButton, { size: 'small', type: 'primary', onClick: () => {
+            // TODO: onepisya 接入后端 API 
+            console.log('查看详情', row)
+          } }, { default: () => '放行' }),
+        ]
+      })
+    }
   }
 ];
 
@@ -272,7 +290,7 @@ const formatCreateTime = timeStr => {
           <NSpace justify="end">
             <NButton type="primary" :disabled="loading" @click="handleSearch">
               <template #icon>
-                <icon-uil-search v-show="!loading" class="text-icon"/>
+                <icon-uil-search v-show="!loading" class="text-icon" />
                 <icon-mdi-refresh v-show="loading" class="text-icon" :class="{ 'animate-spin': loading }" />
               </template>
               搜索
@@ -298,16 +316,8 @@ const formatCreateTime = timeStr => {
 
     <!-- 数据表格 remote 很重要、要设置为后端分页。 -->
     <NCard>
-      <NDataTable
-        :remote="true"
-        :columns="columns"
-        :data="data"
-        :loading="loading"
-        :pagination="paginationReactive"
-        :scroll-x="1800"
-        striped
-        size="small"
-      />
+      <NDataTable max-height="500" :remote="true" :columns="columns" :data="data" :loading="loading"
+        :pagination="paginationReactive" :scroll-x="1800" striped size="small" />
     </NCard>
   </div>
 </template>
