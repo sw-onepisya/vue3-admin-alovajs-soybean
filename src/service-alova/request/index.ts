@@ -50,8 +50,8 @@ export const alova = createAlovaRequest(
     tokenRefresher: {
       async isExpired(response) {
         const expiredTokenCodes = import.meta.env.VITE_SERVICE_EXPIRED_TOKEN_CODES?.split(',') || [];
-        const clonedRes = response.clone();
         try {
+          const clonedRes = response.clone();
           // 处理 headers 中返回的头定义不是 json 格式、或者说空响应
           const { code } = await clonedRes.json();
           return expiredTokenCodes.includes(String(code));
