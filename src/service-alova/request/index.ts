@@ -88,8 +88,8 @@ export const alova = createAlovaRequest(
           const data = await response?.clone().json();
           message = data.msg;
           responseCode = String(data.code);
-        } catch (error) {
-          message = response?.statusText;
+        } catch (err) {
+          message = error.message + ': ' + response?.statusText;
           responseCode = String(response?.status);
         }
 
