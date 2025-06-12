@@ -50,8 +50,15 @@ export const alova = createAlovaRequest(
     tokenRefresher: {
       async isExpired(response) {
         const expiredTokenCodes = import.meta.env.VITE_SERVICE_EXPIRED_TOKEN_CODES?.split(',') || [];
-        const { code } = await response.clone().json();
-        return expiredTokenCodes.includes(String(code));
+        const clonedRes = response.clone()
+        try {
+          // 处理 headers 中返回的头定义不是 json 格式、或者说空响应
+          const { code } = await clonedRes.json();
+          return expiredTokenCodes.includes(String(code));
+        } catch (error) {
+          // 返回没过期
+          return false
+        }
       },
       async handler() {
         await handleRefreshToken();
@@ -60,9 +67,13 @@ export const alova = createAlovaRequest(
     async isBackendSuccess(response) {
       // when the backend response code is "0000"(default), it means the request is success
       // to change this logic by yourself, you can modify the `VITE_SERVICE_SUCCESS_CODE` in `.env` file
-      const resp = response.clone();
-      const data = await resp.json();
-      return String(data.code) === import.meta.env.VITE_SERVICE_SUCCESS_CODE;
+      try {
+        const resp = response.clone();
+        const data = await resp.json();
+        return String(data.code) === import.meta.env.VITE_SERVICE_SUCCESS_CODE;
+      } catch (error) {
+        return false
+      }
     },
     async transformBackendResponse(response) {
       return (await response.clone().json()).data;
@@ -73,54 +84,60 @@ export const alova = createAlovaRequest(
       let message = error.message;
       let responseCode = '';
       if (response) {
-        const data = await response?.clone().json();
-        message = data.msg;
-        responseCode = String(data.code);
-      }
 
-      function handleLogout() {
+        try {
+          const data = await response?.clone().json();
+          message = data.msg;
+          responseCode = String(data.code);
+        } catch (error) {
+          message = response?.statusText
+          responseCode = String(response?.status)
+        }
+
+        function handleLogout() {
+          showErrorMsg(state, message);
+          authStore.resetStore();
+        }
+
+        function logoutAndCleanup() {
+          handleLogout();
+          window.removeEventListener('beforeunload', handleLogout);
+          state.errMsgStack = state.errMsgStack.filter(msg => msg !== message);
+        }
+
+        // when the backend response code is in `logoutCodes`, it means the user will be logged out and redirected to login page
+        const logoutCodes = import.meta.env.VITE_SERVICE_LOGOUT_CODES?.split(',') || [];
+        if (logoutCodes.includes(responseCode)) {
+          handleLogout();
+          throw error;
+        }
+
+        // when the backend response code is in `modalLogoutCodes`, it means the user will be logged out by displaying a modal
+        const modalLogoutCodes = import.meta.env.VITE_SERVICE_MODAL_LOGOUT_CODES?.split(',') || [];
+        if (modalLogoutCodes.includes(responseCode) && !state.errMsgStack?.includes(message)) {
+          state.errMsgStack = [...(state.errMsgStack || []), message];
+
+          // prevent the user from refreshing the page
+          window.addEventListener('beforeunload', handleLogout);
+
+          window.$dialog?.error({
+            title: $t('common.error'),
+            content: message,
+            positiveText: $t('common.confirm'),
+            maskClosable: false,
+            closeOnEsc: false,
+            onPositiveClick() {
+              logoutAndCleanup();
+            },
+            onClose() {
+              logoutAndCleanup();
+            }
+          });
+          throw error;
+        }
         showErrorMsg(state, message);
-        authStore.resetStore();
-      }
-
-      function logoutAndCleanup() {
-        handleLogout();
-        window.removeEventListener('beforeunload', handleLogout);
-        state.errMsgStack = state.errMsgStack.filter(msg => msg !== message);
-      }
-
-      // when the backend response code is in `logoutCodes`, it means the user will be logged out and redirected to login page
-      const logoutCodes = import.meta.env.VITE_SERVICE_LOGOUT_CODES?.split(',') || [];
-      if (logoutCodes.includes(responseCode)) {
-        handleLogout();
         throw error;
       }
-
-      // when the backend response code is in `modalLogoutCodes`, it means the user will be logged out by displaying a modal
-      const modalLogoutCodes = import.meta.env.VITE_SERVICE_MODAL_LOGOUT_CODES?.split(',') || [];
-      if (modalLogoutCodes.includes(responseCode) && !state.errMsgStack?.includes(message)) {
-        state.errMsgStack = [...(state.errMsgStack || []), message];
-
-        // prevent the user from refreshing the page
-        window.addEventListener('beforeunload', handleLogout);
-
-        window.$dialog?.error({
-          title: $t('common.error'),
-          content: message,
-          positiveText: $t('common.confirm'),
-          maskClosable: false,
-          closeOnEsc: false,
-          onPositiveClick() {
-            logoutAndCleanup();
-          },
-          onClose() {
-            logoutAndCleanup();
-          }
-        });
-        throw error;
-      }
-      showErrorMsg(state, message);
-      throw error;
     }
   }
 );
