@@ -163,14 +163,26 @@ const columns = [
     width: 100,
     fixed: 'right',
     render: row => {
-      return h(NSpace, { justify: 'center' }, {
-        default: () => [
-          h(NButton, { size: 'small', type: 'primary', onClick: () => {
-            // TODO: onepisya 接入后端 API 
-            console.log('查看详情', row)
-          } }, { default: () => '放行' }),
-        ]
-      })
+      return h(
+        NSpace,
+        { justify: 'center' },
+        {
+          default: () => [
+            h(
+              NButton,
+              {
+                size: 'small',
+                type: 'primary',
+                onClick: () => {
+                  // TODO: onepisya 接入后端 API
+                  console.log('查看详情', row);
+                }
+              },
+              { default: () => '放行' }
+            )
+          ]
+        }
+      );
     }
   }
 ];
@@ -316,8 +328,17 @@ const formatCreateTime = timeStr => {
 
     <!-- 数据表格 remote 很重要、要设置为后端分页。 -->
     <NCard>
-      <NDataTable max-height="500" :remote="true" :columns="columns" :data="data" :loading="loading"
-        :pagination="paginationReactive" :scroll-x="1800" striped size="small" />
+      <NDataTable
+        max-height="500"
+        :remote="true"
+        :columns="columns"
+        :data="data"
+        :loading="loading"
+        :pagination="paginationReactive"
+        :scroll-x="1800"
+        striped
+        size="small"
+      />
     </NCard>
   </div>
 </template>
