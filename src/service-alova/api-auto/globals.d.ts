@@ -360,6 +360,410 @@ declare global {
       /**
        * ---
        *
+       * [GET] 导出所有访客数据
+       *
+       * **path:** /visitor/export/all
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   // 审批意见
+       *   approvalOpinions?: string
+       *   // 审批时间
+       *   // [required]
+       *   approvalTime: string
+       *   // 创建时间
+       *   // [required]
+       *   createTime: string
+       *   // 删除标识
+       *   deleted?: number
+       *   // 邮箱
+       *   email?: string
+       *   // 性别 unknown-未知,male-男性,female-女性）
+       *   gender?: string
+       *   // 主键
+       *   id?: number
+       *   // 证件号码
+       *   identityNo?: string
+       *   // 证件类型（1-身份证,99-其他）
+       *   identityType?: string
+       *   // 是否同意
+       *   isAgree?: string
+       *   // 是否审批
+       *   isApproval?: string
+       *   // 是否取消
+       *   isCancel?: string
+       *   // 手机号
+       *   // [required]
+       *   phone: string
+       *   // 车牌号码
+       *   // [required]
+       *   plateNo: string
+       *   // 原因
+       *   reason?: string
+       *   // 受访者姓名
+       *   // [required]
+       *   receptionistName: string
+       *   // 受访者手机号
+       *   // [required]
+       *   receptionistPhone: string
+       *   // 受访者企业微信userId
+       *   // [required]
+       *   receptionistUserId: string
+       *   // 访问开始时间
+       *   // [required]
+       *   validBeginTime: string
+       *   // 访问结束时间
+       *   // [required]
+       *   validEndTime: string
+       *   // 访客人数
+       *   // [required]
+       *   visitorCount: number
+       *   // 访客单位
+       *   // [required]
+       *   visitorDepartment: string
+       *   // 访客姓名
+       *   // [required]
+       *   visitorName: string
+       *   // 访客类型（1 Contractor 2 Visitor）
+       *   // [required]
+       *   visitorType: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = unknown
+       * ```
+       */
+      exportAllVisitorDataUsingGET<
+        Config extends Alova2MethodConfig<unknown> & {
+          params: {
+            /**
+             * 审批意见
+             */
+            approvalOpinions?: string;
+            /**
+             * 审批时间
+             * [required]
+             */
+            approvalTime: string;
+            /**
+             * 创建时间
+             * [required]
+             */
+            createTime: string;
+            /**
+             * 删除标识
+             */
+            deleted?: number;
+            /**
+             * 邮箱
+             */
+            email?: string;
+            /**
+             * 性别 unknown-未知,male-男性,female-女性）
+             */
+            gender?: string;
+            /**
+             * 主键
+             */
+            id?: number;
+            /**
+             * 证件号码
+             */
+            identityNo?: string;
+            /**
+             * 证件类型（1-身份证,99-其他）
+             */
+            identityType?: string;
+            /**
+             * 是否同意
+             */
+            isAgree?: string;
+            /**
+             * 是否审批
+             */
+            isApproval?: string;
+            /**
+             * 是否取消
+             */
+            isCancel?: string;
+            /**
+             * 手机号
+             * [required]
+             */
+            phone: string;
+            /**
+             * 车牌号码
+             * [required]
+             */
+            plateNo: string;
+            /**
+             * 原因
+             */
+            reason?: string;
+            /**
+             * 受访者姓名
+             * [required]
+             */
+            receptionistName: string;
+            /**
+             * 受访者手机号
+             * [required]
+             */
+            receptionistPhone: string;
+            /**
+             * 受访者企业微信userId
+             * [required]
+             */
+            receptionistUserId: string;
+            /**
+             * 访问开始时间
+             * [required]
+             */
+            validBeginTime: string;
+            /**
+             * 访问结束时间
+             * [required]
+             */
+            validEndTime: string;
+            /**
+             * 访客人数
+             * [required]
+             */
+            visitorCount: number;
+            /**
+             * 访客单位
+             * [required]
+             */
+            visitorDepartment: string;
+            /**
+             * 访客姓名
+             * [required]
+             */
+            visitorName: string;
+            /**
+             * 访客类型（1 Contractor 2 Visitor）
+             * [required]
+             */
+            visitorType: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<unknown, 'general.exportAllVisitorDataUsingGET', Config>;
+      /**
+       * ---
+       *
+       * [GET] 导出指定页的访客数据
+       *
+       * **path:** /visitor/export/page
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   // 审批意见
+       *   approvalOpinions?: string
+       *   // 审批时间
+       *   // [required]
+       *   approvalTime: string
+       *   // 创建时间
+       *   // [required]
+       *   createTime: string
+       *   // 删除标识
+       *   deleted?: number
+       *   // 邮箱
+       *   email?: string
+       *   // 性别 unknown-未知,male-男性,female-女性）
+       *   gender?: string
+       *   // 主键
+       *   id?: number
+       *   // 证件号码
+       *   identityNo?: string
+       *   // 证件类型（1-身份证,99-其他）
+       *   identityType?: string
+       *   // 是否同意
+       *   isAgree?: string
+       *   // 是否审批
+       *   isApproval?: string
+       *   // 是否取消
+       *   isCancel?: string
+       *   pageNum?: number
+       *   pageSize?: number
+       *   // 手机号
+       *   // [required]
+       *   phone: string
+       *   // 车牌号码
+       *   // [required]
+       *   plateNo: string
+       *   // 原因
+       *   reason?: string
+       *   // 受访者姓名
+       *   // [required]
+       *   receptionistName: string
+       *   // 受访者手机号
+       *   // [required]
+       *   receptionistPhone: string
+       *   // 受访者企业微信userId
+       *   // [required]
+       *   receptionistUserId: string
+       *   // 访问开始时间
+       *   // [required]
+       *   validBeginTime: string
+       *   // 访问结束时间
+       *   // [required]
+       *   validEndTime: string
+       *   // 访客人数
+       *   // [required]
+       *   visitorCount: number
+       *   // 访客单位
+       *   // [required]
+       *   visitorDepartment: string
+       *   // 访客姓名
+       *   // [required]
+       *   visitorName: string
+       *   // 访客类型（1 Contractor 2 Visitor）
+       *   // [required]
+       *   visitorType: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = unknown
+       * ```
+       */
+      exportVisitorPageDataUsingGET<
+        Config extends Alova2MethodConfig<unknown> & {
+          params: {
+            /**
+             * 审批意见
+             */
+            approvalOpinions?: string;
+            /**
+             * 审批时间
+             * [required]
+             */
+            approvalTime: string;
+            /**
+             * 创建时间
+             * [required]
+             */
+            createTime: string;
+            /**
+             * 删除标识
+             */
+            deleted?: number;
+            /**
+             * 邮箱
+             */
+            email?: string;
+            /**
+             * 性别 unknown-未知,male-男性,female-女性）
+             */
+            gender?: string;
+            /**
+             * 主键
+             */
+            id?: number;
+            /**
+             * 证件号码
+             */
+            identityNo?: string;
+            /**
+             * 证件类型（1-身份证,99-其他）
+             */
+            identityType?: string;
+            /**
+             * 是否同意
+             */
+            isAgree?: string;
+            /**
+             * 是否审批
+             */
+            isApproval?: string;
+            /**
+             * 是否取消
+             */
+            isCancel?: string;
+            pageNum?: number;
+            pageSize?: number;
+            /**
+             * 手机号
+             * [required]
+             */
+            phone: string;
+            /**
+             * 车牌号码
+             * [required]
+             */
+            plateNo: string;
+            /**
+             * 原因
+             */
+            reason?: string;
+            /**
+             * 受访者姓名
+             * [required]
+             */
+            receptionistName: string;
+            /**
+             * 受访者手机号
+             * [required]
+             */
+            receptionistPhone: string;
+            /**
+             * 受访者企业微信userId
+             * [required]
+             */
+            receptionistUserId: string;
+            /**
+             * 访问开始时间
+             * [required]
+             */
+            validBeginTime: string;
+            /**
+             * 访问结束时间
+             * [required]
+             */
+            validEndTime: string;
+            /**
+             * 访客人数
+             * [required]
+             */
+            visitorCount: number;
+            /**
+             * 访客单位
+             * [required]
+             */
+            visitorDepartment: string;
+            /**
+             * 访客姓名
+             * [required]
+             */
+            visitorName: string;
+            /**
+             * 访客类型（1 Contractor 2 Visitor）
+             * [required]
+             */
+            visitorType: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<unknown, 'general.exportVisitorPageDataUsingGET', Config>;
+      /**
+       * ---
+       *
        * [GET] 根据企业微信code查询手机号
        *
        * **path:** /visitor/getUserIdByCode
@@ -1094,6 +1498,28 @@ declare global {
       /**
        * ---
        *
+       * [POST] pc登出、让 session 失效
+       *
+       * **path:** /visitor/pc/logout
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   code?: number
+       *   data?: object
+       *   msg?: string
+       *   status?: string
+       * }
+       * ```
+       */
+      pcLogoutUsingPOST<Config extends Alova2MethodConfig<R>>(
+        config?: Config
+      ): Alova2Method<R, 'general.pcLogoutUsingPOST', Config>;
+      /**
+       * ---
+       *
        * [GET] 访客申请信息分页
        *
        * **path:** /visitor/queryPage
@@ -1300,6 +1726,101 @@ declare global {
       >(
         config: Config
       ): Alova2Method<R, 'general.queryPageUsingGET', Config>;
+      /**
+       * ---
+       *
+       * [POST] 保安放行访客
+       *
+       * **path:** /visitor/releaseVisitor
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = {
+       *   // 审批意见
+       *   approvalOpinions?: string
+       *   // 审批时间
+       *   // [required]
+       *   approvalTime: string
+       *   // 创建时间
+       *   // [required]
+       *   createTime: string
+       *   // 删除标识
+       *   deleted?: number
+       *   // 邮箱
+       *   email?: string
+       *   // 性别 unknown-未知,male-男性,female-女性）
+       *   gender?: string
+       *   // 主键
+       *   id?: number
+       *   // 证件号码
+       *   identityNo?: string
+       *   // 证件类型（1-身份证,99-其他）
+       *   identityType?: string
+       *   // 是否同意
+       *   isAgree?: string
+       *   // 是否审批
+       *   isApproval?: string
+       *   // 是否取消
+       *   isCancel?: string
+       *   // 手机号
+       *   // [required]
+       *   phone: string
+       *   // 车牌号码
+       *   // [required]
+       *   plateNo: string
+       *   // 原因
+       *   reason?: string
+       *   // 受访者姓名
+       *   // [required]
+       *   receptionistName: string
+       *   // 受访者手机号
+       *   // [required]
+       *   receptionistPhone: string
+       *   // 受访者企业微信userId
+       *   // [required]
+       *   receptionistUserId: string
+       *   // 访问开始时间
+       *   // [required]
+       *   validBeginTime: string
+       *   // 访问结束时间
+       *   // [required]
+       *   validEndTime: string
+       *   // 访客人数
+       *   // [required]
+       *   visitorCount: number
+       *   // 访客单位
+       *   // [required]
+       *   visitorDepartment: string
+       *   // 访客姓名
+       *   // [required]
+       *   visitorName: string
+       *   // 访客类型（1 Contractor 2 Visitor）
+       *   // [required]
+       *   visitorType: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   code?: number
+       *   data?: object
+       *   msg?: string
+       *   status?: string
+       * }
+       * ```
+       */
+      releaseVisitorUsingPost<
+        Config extends Alova2MethodConfig<R> & {
+          data: Visitor;
+        }
+      >(
+        config: Config
+      ): Alova2Method<R, 'general.releaseVisitorUsingPost', Config>;
     };
   }
 

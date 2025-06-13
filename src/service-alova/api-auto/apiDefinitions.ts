@@ -17,6 +17,8 @@
  */
 export default {
   'general.detailUsingGET': ['GET', '/visitor/detail'],
+  'general.exportAllVisitorDataUsingGET': ['GET', '/visitor/export/all'],
+  'general.exportVisitorPageDataUsingGET': ['GET', '/visitor/export/page'],
   'general.getMobileByCodeUsingGET': ['GET', '/visitor/getUserIdByCode'],
   'general.cancelUsingGET': ['GET', '/visitor/mobile/cancel'],
   'general.examineUsingPOST': ['POST', '/visitor/mobile/examine'],
@@ -25,5 +27,7 @@ export default {
   'general.mobileQueryPageUsingGET': ['GET', '/visitor/mobile/queryPage'],
   'general.visitRequestUsingPOST': ['POST', '/visitor/mobile/visitRequest'],
   'general.pcLoginUsingPOST': ['POST', '/visitor/pc/login'],
-  'general.queryPageUsingGET': ['GET', '/visitor/queryPage']
+  'general.pcLogoutUsingPOST': ['POST', '/visitor/pc/logout'],
+  'general.queryPageUsingGET': ['GET', '/visitor/queryPage'],
+  'general.releaseVisitorUsingPost': ['POST', '/visitor/releaseVisitor']
 };
