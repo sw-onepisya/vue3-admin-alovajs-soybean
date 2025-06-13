@@ -147,9 +147,15 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     );
 
     if (!error) {
+      console.log("loginToken", loginToken)
+      // 由于我的后端不使用  Token 而是使用 HttpOnly 的 cookie 基于 Session
+      // 所以这里都无所谓的 但是在我们的 isLogin 是通过 token localStorage 中的 token 来判断的、
+      // 所以我们可以随便设置一个、如果 401 了会自动跳转到 login 页面
+      // 所以其实我们也可以、直接让后端把 cookie 通过 data 返回过来。
       const pass = await loginByToken({
-        token: loginToken as string,
-        refreshToken: undefined
+        // token: loginToken as string,
+        token: loginToken,
+        refreshToken: ''
       } as any);
 
       if (pass) {
