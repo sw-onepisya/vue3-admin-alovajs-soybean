@@ -22,7 +22,7 @@ export interface RequestOptions<AG extends AlovaGenerics> {
    *
    * @param response alova response
    */
-  isBackendSuccess: (response: AG['Response']) => Promise<boolean>;
+  isBackendSuccess: (response: AG['Response'], Method: Method<AG>) => Promise<boolean>;
 
   /** The config to refresh token */
   tokenRefresher?: {
@@ -48,5 +48,5 @@ export interface RequestOptions<AG extends AlovaGenerics> {
    *
    * @param response alova response
    */
-  transformBackendResponse: (response: AG['Response']) => any;
+  transformBackendResponse: (response: AG['Response'], methodInstance: Method<AG>) => any;
 }

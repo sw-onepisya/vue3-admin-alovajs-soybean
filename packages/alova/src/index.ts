@@ -47,8 +47,8 @@ export const createAlovaRequest = <
         let error: any = null;
         let transformedData: any = null;
         try {
-          if (await options.isBackendSuccess(response)) {
-            transformedData = await options.transformBackendResponse(response);
+          if (await options.isBackendSuccess(response, method)) {
+            transformedData = await options.transformBackendResponse(response, method);
           } else {
             error = new Error('the backend request error');
             error.code = BACKEND_ERROR_CODE;
