@@ -16,7 +16,26 @@ export const alovaInstance = alova;
 //   }
 // });
 
-export const $$userConfigMap = withConfigType({});
+export const $$userConfigMap = withConfigType({
+  'general.queryPageUsingGET':{
+    name:'queryPageUsingGET',
+    cacheFor: 15*1000,
+  },
+  'general.exportAllVisitorDataUsingGET':{
+    name:'exportAllVisitorDataUsingGET',
+    cacheFor: 15*1000,
+    meta:{
+      isDownload: true
+    }
+  },
+  'general.exportVisitorPageDataUsingGET':{
+    name:'exportVisitorPageDataUsingGET',
+    cacheFor: 15*1000,
+    meta:{
+      isDownload: true
+    }
+  }
+});
 
 const Apis = createApis(alovaInstance, $$userConfigMap);
 
