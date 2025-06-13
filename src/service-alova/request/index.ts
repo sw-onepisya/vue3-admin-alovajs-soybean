@@ -64,9 +64,12 @@ export const alova = createAlovaRequest(
         await handleRefreshToken();
       }
     },
-    async isBackendSuccess(response) {
+    async isBackendSuccess(response, method) {
       // when the backend response code is "0000"(default), it means the request is success
       // to change this logic by yourself, you can modify the `VITE_SERVICE_SUCCESS_CODE` in `.env` file
+      if (method?.meta?.isDownload && String(response.status) === import.meta.env.VITE_SERVICE_SUCCESS_CODE) {
+        return true;
+      }
       try {
         const resp = response.clone();
         const data = await resp.json();
@@ -75,7 +78,10 @@ export const alova = createAlovaRequest(
         return false;
       }
     },
-    async transformBackendResponse(response) {
+    async transformBackendResponse(response, method) {
+      if (method?.meta?.isDownload) {
+        return response?.blob();
+      }
       return (await response.clone().json()).data;
     },
     async onError(error, response) {
@@ -89,7 +95,7 @@ export const alova = createAlovaRequest(
           message = data.msg;
           responseCode = String(data.code);
         } catch (err) {
-          message = error.message + ': ' + response?.statusText;
+          message = `${error.message}: ${response?.statusText}`;
           responseCode = String(response?.status);
         }
 
