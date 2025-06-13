@@ -50,7 +50,15 @@ function logout() {
     positiveText: $t('common.confirm'),
     negativeText: $t('common.cancel'),
     onPositiveClick: () => {
-      authStore.resetStore();
+      // TODO: 调用登出接口
+      Apis.general.pcLogoutUsingPOST()
+      .send()
+      .then(res=>{
+        authStore.resetStore();
+      })
+      .catch(logoutError=>{
+        window.$message?.error(logoutError.message);
+      })
     }
   });
 }
