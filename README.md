@@ -15,6 +15,12 @@
   - 注意是是删除里面的命令、而不是直接把 simple-git-hooks 这个对象直接删掉、是把内部的 key value 删除掉
   - 2、执行 simple-git-hooks 命令
 - 当前的 env 环境使用的是 `.env` + `.env.test` 两个文件、在开发环境的使用
+- 全局消息
+  - window.$notification
+  - window.$dialog
+  - window.$message
+
+
 
 ---
 
