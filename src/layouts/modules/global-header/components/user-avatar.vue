@@ -5,6 +5,7 @@ import { useAuthStore } from '@/store/modules/auth';
 import { useRouterPush } from '@/hooks/common/router';
 import { useSvgIcon } from '@/hooks/common/icon';
 import { $t } from '@/locales';
+import Apis from '@/service-alova/api-auto';
 
 defineOptions({
   name: 'UserAvatar'
