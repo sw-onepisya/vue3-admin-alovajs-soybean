@@ -20,6 +20,8 @@
 
 支持 `tokenRefresher` 会传递给 `alova.js` 的 `createServerTokenAuthentication` 的 成功和失败回调函数。
 
+支持自定义 requestAdapter
+
 > 但是与我自己的相比起来缺少了很多东西、
 
 比如 createServerTokenAuthentication 中的 login, assignToken, logout, 不使用了、仅仅使用了 refreshToken 中的 isExpired 和 handler
