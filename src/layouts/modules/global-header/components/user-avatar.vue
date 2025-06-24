@@ -52,14 +52,15 @@ function logout() {
     negativeText: $t('common.cancel'),
     onPositiveClick: () => {
       // TODO: 调用登出接口
-      Apis.general.pcLogoutUsingPOST()
-      .send()
-      .then(res=>{
-        authStore.resetStore();
-      })
-      .catch(logoutError=>{
-        window.$message?.error(logoutError.message);
-      })
+      Apis.general
+        .pcLogoutUsingPOST()
+        .send()
+        .then(res => {
+          authStore.resetStore();
+        })
+        .catch(logoutError => {
+          window.$message?.error(logoutError.message);
+        });
     }
   });
 }

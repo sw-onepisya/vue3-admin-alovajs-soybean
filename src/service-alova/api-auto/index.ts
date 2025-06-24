@@ -6,13 +6,11 @@ import { createApis, withConfigType } from './createApis';
 import apiDefinitions from './apiDefinitions';
 
 // 定义 API 定义的类型
-type DefaultHttpMethod =  'GET' | 'POST' | 'PUT' | 'DELETE' 
-| 'HEAD' | 'OPTIONS' | 'PATCH';
+type DefaultHttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'PATCH';
 type CustomHttpMethod = string & {};
 type HttpMethod = DefaultHttpMethod | CustomHttpMethod;
 type ApiDefinition = [HttpMethod, string];
 type ApiDefinitions = Record<keyof typeof apiDefinitions, ApiDefinition>;
-
 
 export const alovaInstance = alova;
 
@@ -58,12 +56,12 @@ const customConfigTypes: Partial<Record<keyof typeof apiDefinitions, any>> = {
   'general.exportAllVisitorDataUsingGET': {
     meta: {
       isDownload: true
-    },
+    }
   },
   'general.exportVisitorPageDataUsingGET': {
     meta: {
       isDownload: true
-    },
+    }
   }
 };
 
@@ -102,7 +100,7 @@ const finalConfig = mergeConfigs(defaultConfigTypes, customConfigTypes);
 // 导出配置映射
 export const $$userConfigMap = withConfigType(finalConfig);
 
-console.log("api-auto finalConfig", finalConfig);
+console.log('api-auto finalConfig', finalConfig);
 
 const Apis = createApis(alovaInstance, $$userConfigMap);
 

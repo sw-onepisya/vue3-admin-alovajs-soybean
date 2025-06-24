@@ -1,13 +1,25 @@
 <script setup>
 import { computed, h, reactive, ref } from 'vue';
 import { useThrottleFn } from '@vueuse/core';
-import { NAlert, NButton, NCard, NDataTable, NDatePicker, NFormItem, NGi, NGrid, NInput, NSelect, NSpace, NTag } from 'naive-ui';
-import { usePagination, useRequest } from '@sa/alova/client';
-import Apis from '@/service-alova/api-auto';
-
+import {
+  NAlert,
+  NButton,
+  NCard,
+  NDataTable,
+  NDatePicker,
+  NFormItem,
+  NGi,
+  NGrid,
+  NInput,
+  NSelect,
+  NSpace,
+  NTag
+} from 'naive-ui';
 import dayjs from 'dayjs';
+import { usePagination, useRequest } from '@sa/alova/client';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import Apis from '@/service-alova/api-auto';
 
 // 配置 dayjs 插件
 dayjs.extend(utc);
@@ -30,7 +42,7 @@ const searchParams = reactive({
   receptionistName: '',
   status: '',
   validBeginTime: null, // 访问开始时间
-  validEndTime: null    // 访问结束时间
+  validEndTime: null // 访问结束时间
 });
 
 // 过滤空值的搜索参数
@@ -51,8 +63,7 @@ const filteredSearchParams = computed(() => {
       } else if (statusValue === 'cancelled') {
         params.isCancel = '1'; // 已取消
       }
-    }
-    else if (key === 'validBeginTime' || key === 'validEndTime') {
+    } else if (key === 'validBeginTime' || key === 'validEndTime') {
       // 处理时间字段
       // 处理时间字段
       if (searchParams[key]) {
@@ -132,7 +143,7 @@ const columns = [
     key: 'reason',
     width: 180,
     fixed: 'left',
-    render: row =>{
+    render: row => {
       return h(
         'span',
         {
@@ -143,7 +154,7 @@ const columns = [
           }
         },
         { default: () => row.reason || '-' }
-      )
+      );
     }
   },
   {
@@ -227,10 +238,8 @@ const columns = [
                       title: '放行成功',
                       content: '已向被访人发送通知',
                       duration: 3000
-                    })
-
-
-                  })
+                    });
+                  });
                 }
               },
               { default: () => '放行' }
@@ -242,18 +251,22 @@ const columns = [
   }
 ];
 
-const { send: release, loading: releaseLoading, error: releaseError } = useRequest(
-  (row) => Apis.general.releaseVisitorUsingPost({
-    data: row
-  }),
+const {
+  send: release,
+  loading: releaseLoading,
+  error: releaseError
+} = useRequest(
+  row =>
+    Apis.general.releaseVisitorUsingPost({
+      data: row
+    }),
   {
     onSuccess: res => {
       console.log('release success', res);
     },
     immediate: false
-  })
-
-
+  }
+);
 
 // 分页配置
 const paginationReactive = computed(() => {
@@ -351,23 +364,23 @@ const handleExportAll = async () => {
         pageSize: 10000, // 设置一个较大的数值获取所有数据
         ...filteredSearchParams.value
       }
-    })
+    });
 
     if (response?.records) {
-      debugger
-      exportToCSV(response.records, '访客数据_全部')
+      debugger;
+      exportToCSV(response.records, '访客数据_全部');
     }
   } catch (error) {
-    console.error('导出失败:', error)
+    console.error('导出失败:', error);
   }
-}
+};
 
 // 前端导出 - 导出当前页数据
 const handleExportCurrent = () => {
   if (data.value && data.value.length > 0) {
-    exportToCSV(data.value, `访客数据_第${page.value}页`)
+    exportToCSV(data.value, `访客数据_第${page.value}页`);
   }
-}
+};
 
 // CSV导出函数
 const exportToCSV = (dataList, filename) => {
@@ -384,12 +397,12 @@ const exportToCSV = (dataList, filename) => {
     '预约时间',
     '创建时间',
     '状态'
-  ]
+  ];
 
   const csvContent = [
     headers.join(','),
     ...dataList.map(row => {
-      const { status } = getStatusInfo(row) // 使用正确的方法名
+      const { status } = getStatusInfo(row); // 使用正确的方法名
       return [
         '浙江清翔越',
         row.receptionistName || '',
@@ -403,20 +416,22 @@ const exportToCSV = (dataList, filename) => {
         formatAppointmentTime(row.validBeginTime, row.validEndTime),
         formatCreateTime(row.createTime),
         status // 使用从 getStatusInfo 获取的状态
-      ].map(field => `"${field}"`).join(',')
+      ]
+        .map(field => `"${field}"`)
+        .join(',');
     })
-  ].join('\n')
+  ].join('\n');
 
-  const blob = new Blob([`\uFEFF${csvContent}`], { type: 'text/csv;charset=utf-8;' })
-  const link = document.createElement('a')
-  const url = URL.createObjectURL(blob)
-  link.setAttribute('href', url)
-  link.setAttribute('download', `${filename}.csv`)
-  link.style.visibility = 'hidden'
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
-}
+  const blob = new Blob([`\uFEFF${csvContent}`], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.setAttribute('href', url);
+  link.setAttribute('download', `${filename}.csv`);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 
 // 后端导出 - 导出全部数据
 const handleBackendExportAll = async () => {
@@ -424,16 +439,16 @@ const handleBackendExportAll = async () => {
     const response = await Apis.general.exportAllVisitorDataUsingGET({
       params: {
         ...filteredSearchParams.value
-      },
+      }
       // responseType: 'blob' // 重要：设置响应类型为blob
-    })
+    });
 
     // 下载Excel文件
-    downloadExcelFile(response, '访客数据_全部.xlsx')
+    downloadExcelFile(response, '访客数据_全部.xlsx');
   } catch (error) {
-    console.error('后端导出失败:', error)
+    console.error('后端导出失败:', error);
   }
-}
+};
 
 // 后端导出 - 导出当前页数据
 const handleBackendExportCurrent = async () => {
@@ -443,39 +458,40 @@ const handleBackendExportCurrent = async () => {
         pageNum: page.value,
         pageSize: pageSize.value,
         ...filteredSearchParams.value
-      },
+      }
       // responseType: 'blob' // 重要：设置响应类型为blob
-    })
+    });
 
     // 下载Excel文件
-    downloadExcelFile(response, `访客数据_第${page.value}页.xlsx`)
+    downloadExcelFile(response, `访客数据_第${page.value}页.xlsx`);
   } catch (error) {
-    console.error('后端导出失败:', error)
+    console.error('后端导出失败:', error);
   }
-}
+};
 
 // 下载Excel文件的通用函数
 const downloadExcelFile = (blob, filename) => {
   // 创建blob URL
-  const url = window.URL.createObjectURL(new Blob([blob], {
-    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-  }))
+  const url = window.URL.createObjectURL(
+    new Blob([blob], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    })
+  );
 
   // 创建下载链接
-  const link = document.createElement('a')
-  link.href = url
-  link.download = filename
-  link.style.display = 'none'
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  link.style.display = 'none';
 
   // 触发下载
-  document.body.appendChild(link)
-  link.click()
+  document.body.appendChild(link);
+  link.click();
 
   // 清理
-  document.body.removeChild(link)
-  window.URL.revokeObjectURL(url)
-}
-
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
+};
 </script>
 
 <template>
@@ -510,14 +526,26 @@ const downloadExcelFile = (blob, filename) => {
         </NGi>
         <NGi :span="6" :s="12" :xs="24">
           <NFormItem label="访问开始时间">
-            <NDatePicker v-model:value="searchParams.validBeginTime" type="datetime" placeholder="请选择访问开始时间" clearable
-              format="yyyy-MM-dd HH:mm:ss" style="width: 100%;" />
+            <NDatePicker
+              v-model:value="searchParams.validBeginTime"
+              type="datetime"
+              placeholder="请选择访问开始时间"
+              clearable
+              format="yyyy-MM-dd HH:mm:ss"
+              style="width: 100%"
+            />
           </NFormItem>
         </NGi>
         <NGi :span="6" :s="12" :xs="24">
           <NFormItem label="访问结束时间">
-            <NDatePicker v-model:value="searchParams.validEndTime" type="datetime" placeholder="请选择访问结束时间" clearable
-              format="yyyy-MM-dd HH:mm:ss" style="width: 100%;" />
+            <NDatePicker
+              v-model:value="searchParams.validEndTime"
+              type="datetime"
+              placeholder="请选择访问结束时间"
+              clearable
+              format="yyyy-MM-dd HH:mm:ss"
+              style="width: 100%"
+            />
           </NFormItem>
         </NGi>
         <NGi :span="12" :s="12" :xs="24">
@@ -592,8 +620,17 @@ const downloadExcelFile = (blob, filename) => {
 
     <!-- 数据表格 remote 很重要、要设置为后端分页。 -->
     <NCard>
-      <NDataTable max-height="500" :remote="true" :columns="columns" :data="data" :loading="loading"
-        :pagination="paginationReactive" :scroll-x="1800" striped size="small" />
+      <NDataTable
+        max-height="500"
+        :remote="true"
+        :columns="columns"
+        :data="data"
+        :loading="loading"
+        :pagination="paginationReactive"
+        :scroll-x="1800"
+        striped
+        size="small"
+      />
     </NCard>
   </div>
 </template>

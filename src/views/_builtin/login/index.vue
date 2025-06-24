@@ -65,20 +65,24 @@ const bgColor = computed(() => {
           <SystemLogo class="text-64px text-primary lt-sm:text-48px" />
           <h3 class="text-28px text-primary font-500 lt-sm:text-22px">{{ $t('system.title') }}</h3>
           <div class="i-flex-col">
-            <!-- <ThemeSchemaSwitch
+            <!--
+ <ThemeSchemaSwitch
               :theme-schema="themeStore.themeScheme"
               :show-tooltip="false"
               class="text-20px lt-sm:text-18px"
               @switch="themeStore.toggleThemeScheme"
-            /> -->
+            /> 
+-->
             <!-- TODO: 8 多语言 如果不需要可以主题配置中取消掉、 设置 visible:false -->
-            <!-- <LangSwitch
+            <!--
+ <LangSwitch
               v-if="themeStore.header.multilingual.visible"
               :lang="appStore.locale"
               :lang-options="appStore.localeOptions"
               :show-tooltip="false"
               @change-lang="appStore.changeLocale"
-            /> -->
+            /> 
+-->
           </div>
         </header>
         <main class="pt-24px">
