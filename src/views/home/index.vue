@@ -89,8 +89,8 @@ const { loading, data, page, pageSize, total, reload, send } = usePagination(
       data: []
     },
     initialPage: 1,
-    // initialPageSize: 10,
-    initialPageSize: 1, // 为了测试
+    initialPageSize: 10,
+    // initialPageSize: 1, // 为了测试
     total: res => {
       return res?.total || 0;
     },
@@ -126,6 +126,25 @@ const columns = [
       return h(NTag, { type }, { default: () => status });
     },
     fixed: 'left'
+  },
+  {
+    title: '访问原因',
+    key: 'reason',
+    width: 180,
+    fixed: 'left',
+    render: row =>{
+      return h(
+        'span',
+        {
+          style: {
+            maxWidth: '180px',
+            maxHeight: '100%',
+            overflow: 'auto'
+          }
+        },
+        { default: () => row.reason || '-' }
+      )
+    }
   },
   {
     title: '预约人',
@@ -492,16 +511,33 @@ const downloadExcelFile = (blob, filename) => {
         <NGi :span="6" :s="12" :xs="24">
           <NFormItem label="访问开始时间">
             <NDatePicker v-model:value="searchParams.validBeginTime" type="datetime" placeholder="请选择访问开始时间" clearable
-              format="yyyy-MM-dd HH:mm:ss" />
+              format="yyyy-MM-dd HH:mm:ss" style="width: 100%;" />
           </NFormItem>
         </NGi>
         <NGi :span="6" :s="12" :xs="24">
           <NFormItem label="访问结束时间">
             <NDatePicker v-model:value="searchParams.validEndTime" type="datetime" placeholder="请选择访问结束时间" clearable
-              format="yyyy-MM-dd HH:mm:ss" />
+              format="yyyy-MM-dd HH:mm:ss" style="width: 100%;" />
           </NFormItem>
         </NGi>
-        <NGi :span="24">
+        <NGi :span="12" :s="12" :xs="24">
+          <NSpace>
+            <!-- 后端导出 -->
+            <NButton type="primary" @click="handleBackendExportAll">
+              <template #icon>
+                <icon-mdi-download class="text-icon" />
+              </template>
+              导出全部数据
+            </NButton>
+            <NButton @click="handleBackendExportCurrent">
+              <template #icon>
+                <icon-mdi-file-export class="text-icon" />
+              </template>
+              导出当前页
+            </NButton>
+          </NSpace>
+        </NGi>
+        <NGi :span="12" :s="12" :xs="24">
           <NSpace justify="end">
             <NButton type="primary" :disabled="loading" @click="handleSearch">
               <template #icon>
@@ -554,28 +590,6 @@ const downloadExcelFile = (blob, filename) => {
     </NCard>
     -->
 
-          <!-- 后端导出 -->
-    <NCard class="mb-4">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center">
-          <span class="text-base font-medium">数据操作</span>
-        </div>
-        <NSpace>
-          <NButton type="primary" @click="handleBackendExportAll">
-            <template #icon>
-              <icon-mdi-download class="text-icon" />
-            </template>
-            导出全部数据
-          </NButton>
-          <NButton @click="handleBackendExportCurrent">
-            <template #icon>
-              <icon-mdi-file-export class="text-icon" />
-            </template>
-            导出当前页
-          </NButton>
-        </NSpace>
-      </div>
-    </NCard>
     <!-- 数据表格 remote 很重要、要设置为后端分页。 -->
     <NCard>
       <NDataTable max-height="500" :remote="true" :columns="columns" :data="data" :loading="loading"
