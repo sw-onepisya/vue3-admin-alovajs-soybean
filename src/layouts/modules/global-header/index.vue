@@ -52,11 +52,11 @@ const { isFullscreen, toggle } = useFullscreen();
       />
       <!-- TODO: 6 亮色暗色 主题切换 如果不需要可以删除 -->
       <!-- TODO: onepisya  等下我会回来移除掉、因为有可能还需要测试主题颜色 -->
-      <ThemeSchemaSwitch
+      <!-- <ThemeSchemaSwitch
         :theme-schema="themeStore.themeScheme"
         :is-dark="themeStore.darkMode"
         @switch="themeStore.toggleThemeScheme"
-      />
+      /> -->
       <!-- INFO: 6 主题配置 复制配置文件 如果不需要可以删除 -->
       <!-- <ThemeButton /> -->
       <UserAvatar />

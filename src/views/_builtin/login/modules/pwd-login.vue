@@ -26,7 +26,7 @@ interface FormModel {
 
 const model: FormModel = reactive({
   userName: 'admin',
-  password: 'admin123'
+  password: ''
 });
 
 const rules = computed<Record<keyof FormModel, App.Global.FormRule[]>>(() => {
@@ -74,26 +74,6 @@ interface Account {
 //   }
 // ]);
 
-const accounts = computed<Account[]>(() => [
-  {
-    key: 'super',
-    label: $t('page.login.pwdLogin.superAdmin'),
-    userName: 'admin',
-    password: 'admin123'
-  },
-  {
-    key: 'admin',
-    label: $t('page.login.pwdLogin.admin'),
-    userName: 'admin',
-    password: 'admin123'
-  },
-  {
-    key: 'user',
-    label: $t('page.login.pwdLogin.user'),
-    userName: 'admin',
-    password: 'admin123'
-  }
-]);
 
 async function handleAccountLogin(account: Account) {
   await authStore.login(account.userName, account.password);
@@ -141,13 +121,13 @@ async function handleAccountLogin(account: Account) {
         </NButton> 
 -->
       </div>
-      <NDivider class="text-14px text-#666 !m-0">{{ $t('page.login.pwdLogin.otherAccountLogin') }}</NDivider>
+      <!-- <NDivider class="text-14px text-#666 !m-0">{{ $t('page.login.pwdLogin.otherAccountLogin') }}</NDivider> -->
       <!-- TODO: 30 如果不需要其他账号登录、模拟账号一键登录、可以删除 -->
-      <div class="flex-center gap-12px">
+      <!-- <div class="flex-center gap-12px">
         <NButton v-for="item in accounts" :key="item.key" type="primary" @click="handleAccountLogin(item)">
           {{ item.label }}
         </NButton>
-      </div>
+      </div> -->
     </NSpace>
   </NForm>
 </template>
